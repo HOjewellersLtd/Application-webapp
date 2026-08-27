@@ -1,0 +1,3371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>H.O. JEWELLERS</title>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --gold:#d6a84f;
+    --gold-light:#ffe49a;
+    --gold-dark:#9d6d20;
+    --black:#080706;
+    --dark:#11100d;
+    --dark2:#19150e;
+    --text:#ffffff;
+    --muted:#99938a;
+    --border:rgba(255,215,130,.16);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at 15% 5%,
+            rgba(214,168,79,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(214,168,79,.10),
+            transparent 35%
+        ),
+        var(--black);
+
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+/* =========================================================
+   SPLASH SCREEN
+========================================================= */
+
+#splash{
+
+    position:fixed;
+    inset:0;
+
+    background:#050504;
+
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    animation:
+        splashHide 1s ease 2.3s forwards;
+}
+
+.splashLogo{
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    border:2px solid var(--gold-light);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:var(--gold-light);
+
+    font-size:38px;
+
+    box-shadow:
+        0 0 30px rgba(255,215,120,.25),
+        inset 0 0 25px rgba(255,215,120,.08);
+
+    animation:logoPulse 1.5s infinite;
+}
+
+.splashTitle{
+
+    margin-top:20px;
+
+    font-size:25px;
+
+    letter-spacing:5px;
+
+    font-weight:bold;
+}
+
+.splashSubtitle{
+
+    margin-top:9px;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    color:#9d8b67;
+}
+
+@keyframes logoPulse{
+
+    50%{
+        transform:scale(1.08);
+        box-shadow:0 0 60px rgba(255,215,120,.45);
+    }
+
+}
+
+@keyframes splashHide{
+
+    to{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+    }
+
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+#loginScreen{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:22px;
+}
+
+.loginBox{
+
+    width:100%;
+
+    max-width:430px;
+
+    padding:35px 25px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(20px);
+
+    text-align:center;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.55);
+}
+
+.loginLogo{
+
+    width:75px;
+    height:75px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    border:1px solid var(--gold);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:var(--gold-light);
+
+    font-size:30px;
+}
+
+.loginBox h1{
+
+    margin-top:20px;
+
+    letter-spacing:3px;
+
+    font-size:23px;
+}
+
+.loginBox p{
+
+    margin:11px 0 25px;
+
+    color:#999;
+
+    font-size:13px;
+
+    line-height:1.6;
+}
+
+.input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:12px;
+
+    border-radius:13px;
+
+    border:1px solid rgba(255,255,255,.09);
+
+    background:#100e0b;
+
+    color:white;
+
+    outline:none;
+
+    font-size:14px;
+}
+
+.input:focus{
+
+    border-color:rgba(255,215,120,.45);
+}
+
+.goldBtn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe49a,
+            #c18b2c
+        );
+
+    color:#1b1306;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.goldBtn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(214,168,79,.25);
+}
+
+.guestBtn{
+
+    margin-top:11px;
+
+    background:#17130d;
+
+    color:var(--gold-light);
+
+    border:1px solid rgba(255,215,130,.2);
+}
+
+.loginNote{
+
+    margin-top:17px;
+
+    font-size:10px;
+
+    color:#777;
+
+    line-height:1.6;
+}
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app{
+
+    display:none;
+
+    min-height:100vh;
+
+    padding-bottom:85px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+
+    height:72px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 18px;
+
+    background:rgba(8,7,6,.88);
+
+    backdrop-filter:blur(20px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+}
+
+.brand{
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+.brand small{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#9c895f;
+
+    font-size:7px;
+
+    letter-spacing:3px;
+}
+
+.headerProfile{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,215,120,.35);
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.headerProfile img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+/* =========================================================
+   PAGES
+========================================================= */
+
+.page{
+
+    display:none;
+
+    padding:18px;
+
+    max-width:1100px;
+
+    margin:auto;
+
+    animation:pageShow .35s ease;
+}
+
+.page.active{
+
+    display:block;
+}
+
+@keyframes pageShow{
+
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.backBtn{
+
+    background:none;
+
+    border:0;
+
+    color:var(--gold-light);
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    margin-bottom:16px;
+}
+
+.sectionTitle{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:24px 0 14px;
+}
+
+.sectionTitle h2{
+
+    font-size:20px;
+}
+
+.sectionTitle span{
+
+    color:#927d55;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+}
+
+/* =========================================================
+   HOME HERO
+========================================================= */
+
+.hero{
+
+    height:410px;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    background-image:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.96),
+            rgba(0,0,0,.15) 70%
+        ),
+        url(
+            "https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1200&q=85"
+        );
+
+    background-size:cover;
+
+    background-position:center;
+}
+
+.heroContent{
+
+    position:absolute;
+
+    left:23px;
+
+    right:23px;
+
+    bottom:27px;
+}
+
+.heroTag{
+
+    display:inline-block;
+
+    padding:7px 12px;
+
+    border-radius:30px;
+
+    color:var(--gold-light);
+
+    border:1px solid rgba(255,215,120,.3);
+
+    background:rgba(255,215,120,.08);
+
+    font-size:9px;
+
+    letter-spacing:2px;
+}
+
+.hero h1{
+
+    margin-top:13px;
+
+    font-size:36px;
+
+    line-height:1.05;
+}
+
+.hero p{
+
+    margin-top:9px;
+
+    color:#c4c0ba;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+/* =========================================================
+   QUICK BUTTONS
+========================================================= */
+
+.quickGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+}
+
+.quickBtn{
+
+    min-height:112px;
+
+    padding:17px;
+
+    border-radius:20px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    text-align:left;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b160f,
+            #0e0c09
+        );
+
+    border:1px solid var(--border);
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.quickBtn:hover{
+
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(255,215,120,.4);
+}
+
+.quickIcon{
+
+    font-size:25px;
+
+    margin-bottom:11px;
+}
+
+.quickBtn strong{
+
+    display:block;
+
+    font-size:14px;
+}
+
+.quickBtn small{
+
+    display:block;
+
+    margin-top:5px;
+
+    color:#858078;
+
+    font-size:10px;
+
+    line-height:1.4;
+}
+
+/* =========================================================
+   ORDER
+========================================================= */
+
+.orderChoice{
+
+    display:grid;
+
+    gap:14px;
+}
+
+.choice{
+
+    padding:26px;
+
+    border-radius:23px;
+
+    border:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            #1d170f,
+            #0d0b08
+        );
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.choice:hover{
+
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(255,215,120,.4);
+}
+
+.choiceIcon{
+
+    font-size:37px;
+}
+
+.choice h3{
+
+    margin-top:12px;
+
+    font-size:17px;
+}
+
+.choice p{
+
+    margin-top:7px;
+
+    color:#918b82;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+.categoryTabs{
+
+    display:flex;
+
+    gap:8px;
+
+    overflow-x:auto;
+
+    margin-top:17px;
+
+    padding-bottom:5px;
+}
+
+.categoryTabs button{
+
+    padding:10px 17px;
+
+    border-radius:30px;
+
+    background:#15110d;
+
+    color:#888;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    cursor:pointer;
+
+    white-space:nowrap;
+}
+
+.categoryTabs button.active{
+
+    background:var(--gold);
+
+    color:#1a1206;
+
+    border-color:var(--gold);
+}
+
+.products{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+
+    margin-top:15px;
+}
+
+.product{
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#15110d;
+
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.productImg{
+
+    height:165px;
+
+    background-size:cover;
+
+    background-position:center;
+}
+
+.productInfo{
+
+    padding:13px;
+}
+
+.productInfo h3{
+
+    font-size:13px;
+
+    line-height:1.35;
+}
+
+.productInfo p{
+
+    margin:5px 0 10px;
+
+    color:#888;
+
+    font-size:10px;
+}
+
+.addCart{
+
+    width:100%;
+
+    padding:9px;
+
+    border-radius:9px;
+
+    background:transparent;
+
+    color:var(--gold-light);
+
+    border:1px solid rgba(255,215,120,.25);
+
+    cursor:pointer;
+
+    font-size:10px;
+}
+
+/* =========================================================
+   CUSTOM ORDER
+========================================================= */
+
+.formCard{
+
+    padding:20px;
+
+    border-radius:22px;
+
+    background:#14100c;
+
+    border:1px solid var(--border);
+}
+
+label{
+
+    display:block;
+
+    margin:15px 0 7px;
+
+    color:#aaa;
+
+    font-size:11px;
+}
+
+textarea{
+
+    width:100%;
+
+    min-height:110px;
+
+    resize:none;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    background:#0c0a08;
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    outline:none;
+}
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+.slider{
+
+    width:100%;
+
+    overflow:hidden;
+
+    margin-top:20px;
+}
+
+.slides{
+
+    display:flex;
+
+    width:300%;
+
+    transition:.45s;
+}
+
+.slide{
+
+    width:33.333%;
+
+    padding:3px;
+}
+
+.historyCard{
+
+    min-height:320px;
+
+    padding:22px;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b160f,
+            #0c0a08
+        );
+
+    border:1px solid var(--border);
+}
+
+.historyIcon{
+
+    font-size:38px;
+
+    margin-bottom:15px;
+}
+
+.historyCard h2{
+
+    color:var(--gold-light);
+
+    font-size:21px;
+}
+
+.historyItem{
+
+    padding:14px;
+
+    margin-top:13px;
+
+    border-radius:13px;
+
+    background:rgba(255,255,255,.04);
+
+    font-size:13px;
+}
+
+.historyItem span{
+
+    display:block;
+
+    margin-top:5px;
+
+    color:#777;
+
+    font-size:10px;
+}
+
+.sliderDots{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:7px;
+
+    margin:15px;
+}
+
+.dot{
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#4c4945;
+
+    cursor:pointer;
+}
+
+.dot.active{
+
+    background:var(--gold-light);
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profileTop{
+
+    text-align:center;
+
+    padding:10px 0 25px;
+}
+
+.profilePic{
+
+    width:105px;
+    height:105px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid var(--gold);
+
+    margin-bottom:10px;
+}
+
+.profileTop h3{
+
+    font-size:18px;
+}
+
+.profileField{
+
+    margin-bottom:13px;
+}
+
+.profileField span{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    color:#777;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+}
+
+.profileField div{
+
+    padding:14px;
+
+    border-radius:12px;
+
+    background:#15110d;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    font-size:13px;
+
+    word-break:break-word;
+}
+
+.editBtn{
+
+    margin-top:10px;
+}
+
+.logoutBtn{
+
+    margin-top:10px;
+
+    background:#1b130b;
+
+    color:var(--gold-light);
+
+    border:1px solid rgba(255,215,120,.2);
+}
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+.bottomNav{
+
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:72px;
+
+    z-index:5000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-around;
+
+    background:rgba(9,8,6,.95);
+
+    backdrop-filter:blur(20px);
+
+    border-top:
+        1px solid rgba(255,255,255,.07);
+}
+
+.navItem{
+
+    min-width:55px;
+
+    text-align:center;
+
+    color:#73706b;
+
+    font-size:9px;
+
+    cursor:pointer;
+}
+
+.navItem div{
+
+    font-size:20px;
+
+    margin-bottom:4px;
+}
+
+.navItem.active{
+
+    color:var(--gold-light);
+}
+
+/* =========================================================
+   LOGIN REQUIRED MODAL
+========================================================= */
+
+#loginModal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9000;
+
+    background:rgba(0,0,0,.72);
+
+    backdrop-filter:blur(8px);
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px;
+}
+
+.modalBox{
+
+    width:100%;
+
+    max-width:380px;
+
+    padding:28px;
+
+    border-radius:25px;
+
+    background:#15110d;
+
+    border:1px solid var(--border);
+
+    text-align:center;
+}
+
+.modalBox .modalIcon{
+
+    font-size:40px;
+
+    margin-bottom:12px;
+}
+
+.modalBox h2{
+
+    font-size:20px;
+}
+
+.modalBox p{
+
+    color:#888;
+
+    margin:9px 0 20px;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+.modalClose{
+
+    width:100%;
+
+    padding:13px;
+
+    margin-top:9px;
+
+    border-radius:12px;
+
+    background:#0d0b08;
+
+    color:#aaa;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    cursor:pointer;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+#toast{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:88px;
+
+    transform:
+        translateX(-50%)
+        translateY(20px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:10000;
+
+    padding:12px 19px;
+
+    border-radius:30px;
+
+    background:var(--gold-light);
+
+    color:#1b1306;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    transition:.3s;
+}
+
+#toast.show{
+
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media(min-width:700px){
+
+    .quickGrid{
+
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .products{
+
+        grid-template-columns:
+            repeat(4,1fr);
+    }
+
+    .hero{
+
+        height:520px;
+    }
+
+    .orderChoice{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SPLASH
+===================================================== -->
+
+<div id="splash">
+
+    <div class="splashLogo">
+        H
+    </div>
+
+    <div class="splashTitle">
+        H.O. JEWELLERS
+    </div>
+
+    <div class="splashSubtitle">
+        TRUST • PURITY • ELEGANCE
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<section id="loginScreen">
+
+    <div class="loginBox">
+
+        <div class="loginLogo">
+            H
+        </div>
+
+        <h1>
+            H.O. JEWELLERS
+        </h1>
+
+        <p>
+            Sign in to access your personal
+            orders, purchases, dues and profile.
+        </p>
+
+        <input
+            id="gmailInput"
+            class="input"
+            type="email"
+            placeholder="Enter your Gmail address">
+
+        <button
+            class="goldBtn"
+            onclick="loginWithGmail()">
+
+            Continue with Gmail
+
+        </button>
+
+
+        <!-- TESTING BYPASS -->
+
+        <button
+            class="goldBtn guestBtn"
+            onclick="bypassLogin()">
+
+            🚀 Bypass Login — Test App
+
+        </button>
+
+
+        <div class="loginNote">
+
+            Gmail login will be connected to real
+            authentication later.<br>
+
+            The bypass button is only for testing.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN APP
+===================================================== -->
+
+<div id="app">
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="brand">
+
+        H.O. JEWELLERS
+
+        <small>
+            TRUST • PURITY • ELEGANCE
+        </small>
+
+    </div>
+
+
+    <div
+        class="headerProfile"
+        onclick="protectedPage('profile')">
+
+        <img
+            id="headerProfileImage"
+            src="https://i.pravatar.cc/200">
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<section
+    id="home"
+    class="page active">
+
+
+    <div class="hero">
+
+        <div class="heroContent">
+
+            <span class="heroTag">
+                PREMIUM COLLECTION
+            </span>
+
+            <h1>
+                Jewellery<br>
+                That Defines You.
+            </h1>
+
+            <p>
+                Discover timeless Gold and Silver
+                ornaments crafted with elegance.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="sectionTitle">
+
+        <h2>
+            Explore H.O.
+        </h2>
+
+        <span>
+            QUICK ACCESS
+        </span>
+
+    </div>
+
+
+    <div class="quickGrid">
+
+
+        <!-- CURRENT RATES -->
+
+        <div
+            class="quickBtn"
+            onclick="openExternal(
+                'https://example.com/rates'
+            )">
+
+            <div class="quickIcon">
+                📈
+            </div>
+
+            <strong>
+                Current Rates
+            </strong>
+
+            <small>
+                Today's Gold & Silver rates
+            </small>
+
+        </div>
+
+
+        <!-- ORDER -->
+
+        <div
+            class="quickBtn"
+            onclick="openPage('order')">
+
+            <div class="quickIcon">
+                💎
+            </div>
+
+            <strong>
+                Order Products
+            </strong>
+
+            <small>
+                Shop or customise jewellery
+            </small>
+
+        </div>
+
+
+        <!-- HISTORY PROTECTED -->
+
+        <div
+            class="quickBtn"
+            onclick="protectedPage('history')">
+
+            <div class="quickIcon">
+                📜
+            </div>
+
+            <strong>
+                Your History
+            </strong>
+
+            <small>
+                Purchases, dues & delivery
+            </small>
+
+        </div>
+
+
+        <!-- NOTIFICATIONS -->
+
+        <div
+            class="quickBtn"
+            onclick="openExternal(
+                'https://example.com/notifications'
+            )">
+
+            <div class="quickIcon">
+                🔔
+            </div>
+
+            <strong>
+                Notifications
+            </strong>
+
+            <small>
+                Latest H.O. updates
+            </small>
+
+        </div>
+
+
+        <!-- PROFILE PROTECTED -->
+
+        <div
+            class="quickBtn"
+            onclick="protectedPage('profile')">
+
+            <div class="quickIcon">
+                👤
+            </div>
+
+            <strong>
+                Your Profile
+            </strong>
+
+            <small>
+                Personal information
+            </small>
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <div
+            class="quickBtn"
+            onclick="openExternal(
+                'https://example.com/about'
+            )">
+
+            <div class="quickIcon">
+                ℹ️
+            </div>
+
+            <strong>
+                About Us
+            </strong>
+
+            <small>
+                Know H.O. JEWELLERS
+            </small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ORDER PAGE
+===================================================== -->
+
+<section
+    id="order"
+    class="page">
+
+    <button
+        class="backBtn"
+        onclick="openPage('home')">
+
+        ← Back
+
+    </button>
+
+
+    <div class="sectionTitle">
+
+        <h2>
+            Order Products
+        </h2>
+
+    </div>
+
+
+    <div class="orderChoice">
+
+
+        <!-- PREMADE -->
+
+        <div
+            class="choice"
+            onclick="openPage('products')">
+
+            <div class="choiceIcon">
+                💍
+            </div>
+
+            <h3>
+                Order Premade Products
+            </h3>
+
+            <p>
+                Browse Gold and Silver jewellery
+                already available in our collections.
+            </p>
+
+        </div>
+
+
+        <!-- CUSTOM -->
+
+        <div
+            class="choice"
+            onclick="openPage('custom')">
+
+            <div class="choiceIcon">
+                ✨
+            </div>
+
+            <h3>
+                Order a New Customised Product
+            </h3>
+
+            <p>
+                Submit your requirements for a
+                specially designed jewellery piece.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
+
+<section
+    id="products"
+    class="page">
+
+    <button
+        class="backBtn"
+        onclick="openPage('order')">
+
+        ← Back
+
+    </button>
+
+
+    <h2>
+        Our Collections
+    </h2>
+
+
+    <div class="categoryTabs">
+
+        <button
+            class="active"
+            onclick="
+                showCategory('gold',this)
+            ">
+
+            GOLD
+
+        </button>
+
+
+        <button
+            onclick="
+                showCategory('silver',this)
+            ">
+
+            SILVER
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="productGrid"
+        class="products">
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CUSTOM ORDER
+===================================================== -->
+
+<section
+    id="custom"
+    class="page">
+
+    <button
+        class="backBtn"
+        onclick="openPage('order')">
+
+        ← Back
+
+    </button>
+
+
+    <div class="sectionTitle">
+
+        <h2>
+            Custom Jewellery
+        </h2>
+
+    </div>
+
+
+    <div class="formCard">
+
+
+        <label>
+            Jewellery Type
+        </label>
+
+        <select
+            id="customType"
+            class="input">
+
+            <option>
+                Ring
+            </option>
+
+            <option>
+                Necklace
+            </option>
+
+            <option>
+                Bangle
+            </option>
+
+            <option>
+                Earrings
+            </option>
+
+            <option>
+                Bracelet
+            </option>
+
+            <option>
+                Chain
+            </option>
+
+            <option>
+                Other
+            </option>
+
+        </select>
+
+
+        <label>
+            Metal
+        </label>
+
+        <select
+            id="customMetal"
+            class="input">
+
+            <option>
+                Gold
+            </option>
+
+            <option>
+                Silver
+            </option>
+
+        </select>
+
+
+        <label>
+            Describe Your Design
+        </label>
+
+        <textarea
+            id="customDescription"
+            placeholder="
+Describe your design,
+size, pattern, stones,
+weight preference etc.
+"></textarea>
+
+
+        <label>
+            Approximate Budget
+        </label>
+
+        <input
+            id="customBudget"
+            class="input"
+            placeholder="Example: ₹50,000">
+
+
+        <button
+            class="goldBtn"
+            onclick="submitCustomOrder()">
+
+            Send Custom Order Request
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HISTORY
+===================================================== -->
+
+<section
+    id="history"
+    class="page">
+
+    <h2>
+        Your History
+    </h2>
+
+    <p
+        style="
+        color:#777;
+        font-size:11px;
+        margin-top:6px;
+        ">
+
+        Your personal customer information
+
+    </p>
+
+
+    <div class="slider">
+
+        <div
+            class="slides"
+            id="slides">
+
+
+            <!-- PURCHASED -->
+
+            <div class="slide">
+
+                <div class="historyCard">
+
+                    <div class="historyIcon">
+                        🧾
+                    </div>
+
+                    <h2>
+                        Purchased
+                    </h2>
+
+
+                    <div class="historyItem">
+
+                        Gold Ring
+
+                        <span>
+                            Purchased • ₹35,000
+                        </span>
+
+                    </div>
+
+
+                    <div class="historyItem">
+
+                        Silver Bracelet
+
+                        <span>
+                            Purchased • ₹8,500
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DUES -->
+
+            <div class="slide">
+
+                <div class="historyCard">
+
+                    <div class="historyIcon">
+                        💰
+                    </div>
+
+                    <h2>
+                        Your Dues
+                    </h2>
+
+
+                    <div class="historyItem">
+
+                        Outstanding Balance
+
+                        <span>
+                            ₹12,500
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="goldBtn"
+                        style="margin-top:20px"
+                        onclick="
+                        toast(
+                        'Payment system will be connected later'
+                        )
+                        ">
+
+                        View Payment Details
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CART -->
+
+            <div class="slide">
+
+                <div class="historyCard">
+
+                    <div class="historyIcon">
+                        🛒
+                    </div>
+
+                    <h2>
+                        Cart & Delivery
+                    </h2>
+
+
+                    <div
+                        id="cartItems">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="sliderDots">
+
+        <div
+            class="dot active"
+            onclick="slideTo(0)">
+        </div>
+
+        <div
+            class="dot"
+            onclick="slideTo(1)">
+        </div>
+
+        <div
+            class="dot"
+            onclick="slideTo(2)">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<section
+    id="profile"
+    class="page">
+
+    <h2>
+        Your Profile
+    </h2>
+
+
+    <div class="profileTop">
+
+        <img
+            id="profileImage"
+            class="profilePic"
+            src="https://i.pravatar.cc/300">
+
+
+        <h3 id="profileName">
+            Customer
+        </h3>
+
+    </div>
+
+
+    <div class="formCard">
+
+
+        <div class="profileField">
+
+            <span>
+                NAME
+            </span>
+
+            <div id="nameDisplay">
+                Customer
+            </div>
+
+        </div>
+
+
+        <div class="profileField">
+
+            <span>
+                GMAIL ID
+            </span>
+
+            <div id="emailDisplay">
+                —
+            </div>
+
+        </div>
+
+
+        <div class="profileField">
+
+            <span>
+                ADDRESS
+            </span>
+
+            <div id="addressDisplay">
+                Not added
+            </div>
+
+        </div>
+
+
+        <label>
+            Edit Name
+        </label>
+
+        <input
+            id="nameInput"
+            class="input"
+            placeholder="Your name">
+
+
+        <label>
+            Edit Address
+        </label>
+
+        <textarea
+            id="addressInput"
+            placeholder="Your complete address">
+        </textarea>
+
+
+        <label>
+            Change Profile Picture
+        </label>
+
+        <input
+            id="imageInput"
+            class="input"
+            type="file"
+            accept="image/*"
+            onchange="changeProfilePicture(event)">
+
+
+        <button
+            class="goldBtn editBtn"
+            onclick="saveProfile()">
+
+            Save Profile
+
+        </button>
+
+
+        <button
+            class="goldBtn logoutBtn"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<nav class="bottomNav">
+
+
+    <div
+        class="navItem active"
+        onclick="openPage('home')">
+
+        <div>
+            ⌂
+        </div>
+
+        Home
+
+    </div>
+
+
+    <div
+        class="navItem"
+        onclick="openPage('order')">
+
+        <div>
+            💎
+        </div>
+
+        Orders
+
+    </div>
+
+
+    <div
+        class="navItem"
+        onclick="protectedPage('history')">
+
+        <div>
+            📜
+        </div>
+
+        History
+
+    </div>
+
+
+    <div
+        class="navItem"
+        onclick="
+            openExternal(
+                'https://example.com/notifications'
+            )
+        ">
+
+        <div>
+            🔔
+        </div>
+
+        Alerts
+
+    </div>
+
+
+    <div
+        class="navItem"
+        onclick="protectedPage('profile')">
+
+        <div>
+            👤
+        </div>
+
+        Profile
+
+    </div>
+
+</nav>
+
+
+</div>
+
+
+<!-- =====================================================
+     LOGIN REQUIRED MODAL
+===================================================== -->
+
+<div id="loginModal">
+
+    <div class="modalBox">
+
+        <div class="modalIcon">
+            🔐
+        </div>
+
+        <h2>
+            Login Required
+        </h2>
+
+        <p>
+            This section contains your personal
+            customer data. Please sign in or use
+            the testing bypass.
+        </p>
+
+
+        <button
+            class="goldBtn"
+            onclick="showLoginScreen()">
+
+            Login / Signup
+
+        </button>
+
+
+        <button
+            class="goldBtn guestBtn"
+            onclick="bypassLogin()">
+
+            🚀 Bypass Login for Testing
+
+        </button>
+
+
+        <button
+            class="modalClose"
+            onclick="closeLoginModal()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   DEMO PRODUCT DATA
+========================================================= */
+
+const goldProducts = [
+
+    {
+        name:"Premium Gold Necklace",
+        category:"Necklace",
+        image:
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        name:"Classic Gold Ring",
+        category:"Ring",
+        image:
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        name:"Traditional Gold Bangle",
+        category:"Bangle",
+        image:
+        "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        name:"Gold Earrings",
+        category:"Earrings",
+        image:
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        name:"Premium Gold Chain",
+        category:"Chain",
+        image:
+        "https://images.unsplash.com/photo-1598560917807-1bae44bd2be8?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        name:"Gold Bracelet",
+        category:"Bracelet",
+        image:
+        "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=600&q=80"
+    }
+
+];
+
+
+const silverProducts = [
+
+    {
+        name:"Silver Necklace",
+        category:"Necklace",
+        image:
+        "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        name:"Silver Ring",
+        category:"Ring",
+        image:
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        name:"Silver Bracelet",
+        category:"Bracelet",
+        image:
+        "https://images.unsplash.com/photo-1598560917807-1bae44bd2be8?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        name:"Silver Earrings",
+        category:"Earrings",
+        image:
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80"
+    }
+
+];
+
+
+/* =========================================================
+   LOGIN STATE
+
+   ho_logged_in
+   true  = authenticated/demo user
+   false = guest
+========================================================= */
+
+let loggedIn =
+    localStorage.getItem("ho_logged_in") === "true";
+
+
+/* =========================================================
+   REAL/TEST LOGIN USING GMAIL FIELD
+
+   CURRENTLY THIS ONLY SIMULATES LOGIN.
+   LATER THIS WILL BE REPLACED WITH GOOGLE AUTH.
+========================================================= */
+
+function loginWithGmail(){
+
+    const email =
+        document
+        .getElementById("gmailInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if(!email){
+
+        toast(
+            "Please enter your Gmail address"
+        );
+
+        return;
+    }
+
+
+    if(!email.endsWith("@gmail.com")){
+
+        toast(
+            "Please enter a Gmail address"
+        );
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "ho_email",
+        email
+    );
+
+
+    localStorage.setItem(
+        "ho_logged_in",
+        "true"
+    );
+
+
+    loggedIn=true;
+
+
+    enterApp();
+
+
+    toast(
+        "Welcome to H.O. JEWELLERS"
+    );
+
+}
+
+
+/* =========================================================
+   BYPASS LOGIN
+
+   THIS IS ONLY FOR TESTING.
+========================================================= */
+
+function bypassLogin(){
+
+    localStorage.setItem(
+        "ho_logged_in",
+        "true"
+    );
+
+
+    localStorage.setItem(
+        "ho_demo",
+        "true"
+    );
+
+
+    localStorage.setItem(
+        "ho_email",
+        "demo.customer@gmail.com"
+    );
+
+
+    localStorage.setItem(
+        "ho_name",
+        "Demo Customer"
+    );
+
+
+    localStorage.setItem(
+        "ho_address",
+        "Demo Address, India"
+    );
+
+
+    loggedIn=true;
+
+
+    closeLoginModal();
+
+    enterApp();
+
+
+    toast(
+        "Testing mode activated"
+    );
+
+}
+
+
+/* =========================================================
+   ENTER APP
+========================================================= */
+
+function enterApp(){
+
+    document
+    .getElementById("loginScreen")
+    .style.display="none";
+
+
+    document
+    .getElementById("app")
+    .style.display="block";
+
+
+    loadProfile();
+
+
+    showCategory("gold");
+
+}
+
+
+/* =========================================================
+   SHOW LOGIN SCREEN
+========================================================= */
+
+function showLoginScreen(){
+
+    closeLoginModal();
+
+
+    document
+    .getElementById("app")
+    .style.display="none";
+
+
+    document
+    .getElementById("loginScreen")
+    .style.display="flex";
+
+}
+
+
+/* =========================================================
+   PROTECTED PAGE
+
+   History/Profile cannot be opened by guest.
+========================================================= */
+
+function protectedPage(page){
+
+    if(!loggedIn){
+
+        document
+        .getElementById("loginModal")
+        .style.display="flex";
+
+        return;
+    }
+
+
+    openPage(page);
+
+}
+
+
+/* =========================================================
+   CLOSE LOGIN MODAL
+========================================================= */
+
+function closeLoginModal(){
+
+    document
+    .getElementById("loginModal")
+    .style.display="none";
+
+}
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function openPage(page){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(
+        p => p.classList.remove("active")
+    );
+
+
+    const target =
+        document.getElementById(page);
+
+
+    if(target){
+
+        target.classList.add("active");
+
+    }
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+
+    if(page==="products"){
+
+        showCategory("gold");
+
+    }
+
+
+    if(page==="history"){
+
+        loadCart();
+
+    }
+
+
+    updateBottomNavigation(page);
+
+}
+
+
+/* =========================================================
+   BOTTOM NAV ACTIVE STATE
+========================================================= */
+
+function updateBottomNavigation(page){
+
+    document
+    .querySelectorAll(".navItem")
+    .forEach(
+        item => item.classList.remove("active")
+    );
+
+
+    const navMap={
+
+        home:0,
+
+        order:1,
+
+        history:2,
+
+        profile:4
+
+    };
+
+
+    if(navMap[page] !== undefined){
+
+        document
+        .querySelectorAll(".navItem")
+        [navMap[page]]
+        .classList.add("active");
+
+    }
+
+}
+
+
+/* =========================================================
+   EXTERNAL PAGE
+========================================================= */
+
+function openExternal(url){
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/*
+Replace:
+
+https://example.com/rates
+
+https://example.com/notifications
+
+https://example.com/about
+
+with your real H.O. JEWELLERS pages.
+*/
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+function showCategory(
+    type,
+    button=null
+){
+
+    const grid =
+        document.getElementById(
+            "productGrid"
+        );
+
+
+    const products =
+        type==="gold"
+        ? goldProducts
+        : silverProducts;
+
+
+    if(button){
+
+        document
+        .querySelectorAll(
+            ".categoryTabs button"
+        )
+        .forEach(
+            b => b.classList.remove("active")
+        );
+
+
+        button.classList.add("active");
+
+    }
+
+
+    grid.innerHTML="";
+
+
+    products.forEach(product=>{
+
+        const card =
+            document.createElement("div");
+
+
+        card.className="product";
+
+
+        card.innerHTML=`
+
+            <div
+                class="productImg"
+                style="
+                background-image:
+                url('${product.image}');
+                ">
+            </div>
+
+            <div class="productInfo">
+
+                <h3>
+                    ${product.name}
+                </h3>
+
+                <p>
+                    ${product.category}
+                </p>
+
+                <button
+                    class="addCart"
+                    onclick="
+                    addToCart(
+                    '${product.name}'
+                    )
+                    ">
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+function addToCart(name){
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem(
+                "ho_cart"
+            ) || "[]"
+        );
+
+
+    cart.push({
+
+        name:name,
+
+        date:
+            new Date()
+            .toLocaleDateString(),
+
+        status:
+            "Order received"
+
+    });
+
+
+    localStorage.setItem(
+
+        "ho_cart",
+
+        JSON.stringify(cart)
+
+    );
+
+
+    toast(
+        name +
+        " added to your cart"
+    );
+
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+function loadCart(){
+
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
+
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem(
+                "ho_cart"
+            ) || "[]"
+        );
+
+
+    if(cart.length===0){
+
+        container.innerHTML=`
+
+            <div class="historyItem">
+
+                Your cart is empty.
+
+                <span>
+                    Add jewellery from
+                    our collection.
+                </span>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML="";
+
+
+    cart.forEach(item=>{
+
+        container.innerHTML+=`
+
+            <div class="historyItem">
+
+                ${item.name}
+
+                <span>
+
+                    ${item.status}
+                    •
+                    ${item.date}
+
+                </span>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   CUSTOM ORDER
+========================================================= */
+
+function submitCustomOrder(){
+
+    const type =
+        document
+        .getElementById(
+            "customType"
+        ).value;
+
+
+    const metal =
+        document
+        .getElementById(
+            "customMetal"
+        ).value;
+
+
+    const description =
+        document
+        .getElementById(
+            "customDescription"
+        ).value
+        .trim();
+
+
+    const budget =
+        document
+        .getElementById(
+            "customBudget"
+        ).value
+        .trim();
+
+
+    if(!description){
+
+        toast(
+            "Please describe your design"
+        );
+
+        return;
+    }
+
+
+    toast(
+        "Custom " +
+        metal +
+        " " +
+        type +
+        " request saved for testing"
+    );
+
+
+    /*
+    Later this will send the order to:
+
+    Supabase
+
+    orders table
+    +
+    custom_orders table
+    */
+
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function loadProfile(){
+
+    const email =
+        localStorage.getItem(
+            "ho_email"
+        ) || "—";
+
+
+    const name =
+        localStorage.getItem(
+            "ho_name"
+        ) || "Customer";
+
+
+    const address =
+        localStorage.getItem(
+            "ho_address"
+        ) || "Not added";
+
+
+    document
+    .getElementById(
+        "emailDisplay"
+    )
+    .innerText=email;
+
+
+    document
+    .getElementById(
+        "nameDisplay"
+    )
+    .innerText=name;
+
+
+    document
+    .getElementById(
+        "profileName"
+    )
+    .innerText=name;
+
+
+    document
+    .getElementById(
+        "addressDisplay"
+    )
+    .innerText=address;
+
+
+    document
+    .getElementById(
+        "nameInput"
+    )
+    .value=name;
+
+
+    document
+    .getElementById(
+        "addressInput"
+    )
+    .value=
+        address==="Not added"
+        ? ""
+        : address;
+
+
+    const savedImage =
+        localStorage.getItem(
+            "ho_profile_image"
+        );
+
+
+    if(savedImage){
+
+        document
+        .getElementById(
+            "profileImage"
+        )
+        .src=savedImage;
+
+
+        document
+        .getElementById(
+            "headerProfileImage"
+        )
+        .src=savedImage;
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE PROFILE
+========================================================= */
+
+function saveProfile(){
+
+    const name =
+        document
+        .getElementById(
+            "nameInput"
+        )
+        .value
+        .trim();
+
+
+    const address =
+        document
+        .getElementById(
+            "addressInput"
+        )
+        .value
+        .trim();
+
+
+    if(name){
+
+        localStorage.setItem(
+            "ho_name",
+            name
+        );
+
+    }
+
+
+    if(address){
+
+        localStorage.setItem(
+            "ho_address",
+            address
+        );
+
+    }
+
+
+    loadProfile();
+
+
+    toast(
+        "Profile saved"
+    );
+
+}
+
+
+/* =========================================================
+   PROFILE IMAGE
+========================================================= */
+
+function changeProfilePicture(event){
+
+    const file =
+        event.target.files[0];
+
+
+    if(!file){
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload=function(e){
+
+        const image =
+            e.target.result;
+
+
+        document
+        .getElementById(
+            "profileImage"
+        )
+        .src=image;
+
+
+        document
+        .getElementById(
+            "headerProfileImage"
+        )
+        .src=image;
+
+
+        localStorage.setItem(
+            "ho_profile_image",
+            image
+        );
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   HISTORY SLIDER
+========================================================= */
+
+let currentSlide=0;
+
+
+function slideTo(number){
+
+    currentSlide=number;
+
+
+    document
+    .getElementById("slides")
+    .style.transform=
+        `translateX(-${number*33.333}%)`;
+
+
+    document
+    .querySelectorAll(".dot")
+    .forEach(
+        (dot,index)=>{
+
+            dot.classList.toggle(
+                "active",
+                index===number
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   TOUCH SWIPE
+========================================================= */
+
+let touchStartX=0;
+
+
+document.addEventListener(
+    "touchstart",
+    function(e){
+
+        touchStartX =
+            e.changedTouches[0]
+            .screenX;
+
+    }
+);
+
+
+document.addEventListener(
+    "touchend",
+    function(e){
+
+        const touchEndX =
+            e.changedTouches[0]
+            .screenX;
+
+
+        const difference =
+            touchStartX-touchEndX;
+
+
+        if(
+            document
+            .getElementById("history")
+            .classList
+            .contains("active")
+        ){
+
+            if(
+                difference>60 &&
+                currentSlide<2
+            ){
+
+                slideTo(
+                    currentSlide+1
+                );
+
+            }
+
+
+            if(
+                difference<-60 &&
+                currentSlide>0
+            ){
+
+                slideTo(
+                    currentSlide-1
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
+    localStorage.removeItem(
+        "ho_logged_in"
+    );
+
+
+    localStorage.removeItem(
+        "ho_demo"
+    );
+
+
+    localStorage.removeItem(
+        "ho_email"
+    );
+
+
+    loggedIn=false;
+
+
+    document
+    .getElementById("app")
+    .style.display="none";
+
+
+    document
+    .getElementById("loginScreen")
+    .style.display="flex";
+
+
+    toast(
+        "Logged out"
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message){
+
+    const element =
+        document.getElementById(
+            "toast"
+        );
+
+
+    element.innerText=message;
+
+
+    element.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        ()=>{
+
+            element.classList.remove(
+                "show"
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+/* =========================================================
+   APP STARTUP
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        /*
+        If a previous test login exists,
+        automatically open the app.
+        */
+
+        if(loggedIn){
+
+            enterApp();
+
+        }
+
+
+        showCategory("gold");
+
+    }
+);
+
+</script>
+
+</body>
+</html>
